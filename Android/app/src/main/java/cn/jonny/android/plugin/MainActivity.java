@@ -10,25 +10,31 @@ import com.wufun.pay.plug.wufunvideoadlib.utils.ToastUtils;
 
 public class MainActivity extends UnityPlayerActivity {
 
+    private static String Tag = "WufanVideo";
     /**
      * 初始化只需要调一次即可
      */
     public void initVideoAd() {
-        VideoAdData data = new VideoAdData(MainActivity.this);
-        WufunVideoAdCenter.initVideoAd(MainActivity.this, data, new WufunVideoAdCenter.VideoInterfaceCallback() {
+        Log.d(Tag , "初始化 Video");
+        VideoAdData data = new VideoAdData(getApplicationContext());
+
+        WufunVideoAdCenter.initVideoAd(this, data, new WufunVideoAdCenter.VideoInterfaceCallback() {
             @Override
             public void onSuccess(int isOpen) {
+                Log.d(Tag , "初始化 " + isOpen);
                 if (isOpen == 1) {
-                    ToastUtils.getInstance(MainActivity.this).showToastSystem("初始化成功");
+
+                    ToastUtils.getInstance(getApplicationContext()).showToastSystem("初始化成功");
                 } else {
-                    ToastUtils.getInstance(MainActivity.this).showToastSystem("关闭");
+                    ToastUtils.getInstance(getApplicationContext()).showToastSystem("关闭");
                 }
 
             }
 
             @Override
             public void onFaild(String message) {
-                ToastUtils.getInstance(MainActivity.this).showToastSystem("初始化失败");
+                Log.d(Tag , "初始化失败");
+                ToastUtils.getInstance(getApplicationContext()).showToastSystem("初始化失败");
             }
         });
     }
@@ -90,18 +96,18 @@ public class MainActivity extends UnityPlayerActivity {
         }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        WufunVideoAdCenter.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
-//    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        WufunVideoAdCenter.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        //退出游戏时需要释放资源
-//        WufunVideoAdCenter.onExit(MainActivity.this);
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //退出游戏时需要释放资源
+        WufunVideoAdCenter.onExit(MainActivity.this);
+    }
 }
 
 class LoadVideoAdArgs {

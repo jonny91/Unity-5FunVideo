@@ -7,7 +7,7 @@ PlayerSettings:
   productGUID: f7d5ebfc01ec24f7d81aaf46c2b78fc7
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
-  defaultScreenOrientation: 3
+  defaultScreenOrientation: 0
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -245,8 +245,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: D:/workspace/Project/Platform/Unity-5FunVideo/Unity/android.keystore
+  AndroidKeyaliasName: csg
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   AndroidEnableTango: 0
