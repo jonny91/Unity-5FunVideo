@@ -21,7 +21,7 @@ apply plugin: 'com.android.application'
 
 dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
-	implementation(name: 'app-debug', ext:'aar')
+	implementation(name: '5FunVideo', ext:'aar')
 	implementation(name: 'wufunvideoadlib', ext:'aar')
 }
 

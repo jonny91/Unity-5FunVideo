@@ -11,9 +11,9 @@ import com.wufun.pay.plug.wufunvideoadlib.utils.ToastUtils;
 public class MainActivity extends UnityPlayerActivity {
 
     private static String Tag = "WufanVideo";
-    /**
+    /**                                                                                                                                                                                                                                                                                                                                                             aaaqAQAAAAAQQ·爱情爱情A·AAAA
      * 初始化只需要调一次即可
-     */
+     * */
     public void initVideoAd() {
         Log.d(Tag , "初始化 Video");
         VideoAdData data = new VideoAdData(getApplicationContext());
