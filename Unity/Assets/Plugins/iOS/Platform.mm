@@ -21,7 +21,25 @@
                             @"extension"      : @"扩展参数",//扩展参数（NSString）
                             };
     
-//    [WFAdVideoSDK initAdVideoSDKWithParameters:param];
+    [WFAdVideoSDK initAdVideoSDKWithParameters:param];
+    
+    NSLog(@"wfVideoInit");
+}
+
+- (void) wfVideoLoad : (NSString *)ad UserId:(NSString *)userId
+{
+    NSLog(@"Video Load %@ %@", ad, userId);
+    [WFAdVideoSDK loadVideoAd:ad UserId:userId];
+}
+
+- (void) wfVideoShow
+{
+    NSLog(@"wfVideoShow");
+}
+
+- (BOOL)wfADIsReadyToPlay
+{
+    return [WFAdVideoSDK adIsReadyToPlay];
 }
 
 static Platform * _sharedInstance = nil;

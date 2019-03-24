@@ -9,5 +9,8 @@
 
 @interface Platform : NSObject
 - (void)wfVideoInit;
+- (void)wfVideoLoad : (NSString *)ad UserId:(NSString *)userId;
+- (void)wfVideoShow;
+- (BOOL)wfADIsReadyToPlay;
 + (Platform *) sharedInstance;
 @end

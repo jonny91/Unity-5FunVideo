@@ -24,11 +24,7 @@ public class Demo : MonoBehaviour
 
     private void Awake()
     {
-#if UNITY_ANDROID
-        _videoPlugin = new WFAdVideoAndroidPlugin();
-#elif UNITY_IOS
-        _videoPlugin = new WFAdVideoIOSPlugin();
-#endif
+        _videoPlugin = BasePlugin.Create();
     }
 
     private void Start()

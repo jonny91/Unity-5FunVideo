@@ -11,8 +11,9 @@
 extern "C"
 {
     void WF_Init();
-    void WF_LoadVideoAd(NSString *ab);
+    void WF_LoadVideoAd(char *ab, char *userID);
     void WF_ShowVideoAd();
+    bool WF_ADIsReadyToPlay();
 }
 
 

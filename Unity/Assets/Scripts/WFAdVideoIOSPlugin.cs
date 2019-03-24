@@ -14,10 +14,13 @@ public class WFAdVideoIOSPlugin : BasePlugin, IVideo
     private static extern void WF_Init();
 
     [DllImport("__Internal")]
-    private static extern void WF_LoadVideoAd();
+    private static extern void WF_LoadVideoAd(string ab, string userId);
 
     [DllImport("__Internal")]
     private static extern void WF_ShowVideoAd();
+
+    [DllImport("__Internal")]
+    private static extern bool WF_ADIsReadyToPlay();
 
     public void Init()
     {
@@ -26,11 +29,18 @@ public class WFAdVideoIOSPlugin : BasePlugin, IVideo
 
     public void LoadVideoAd(string[] args)
     {
-        WF_LoadVideoAd();
+        string adName = args[0];
+        string userId = args[1];
+        WF_LoadVideoAd(adName, userId);
     }
 
     public void ShowVideoAd(string[] args)
     {
         WF_ShowVideoAd();
+    }
+
+    public bool ADIsReadyToPlay()
+    {
+        return WF_ADIsReadyToPlay();
     }
 }

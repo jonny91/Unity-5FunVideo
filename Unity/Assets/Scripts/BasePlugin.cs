@@ -8,6 +8,18 @@ using UnityEngine;
 
 public class BasePlugin
 {
+    public static IVideo Create()
+    {
+        IVideo videoPlugin;
+#if UNITY_ANDROID
+        _videoPlugin = new WFAdVideoAndroidPlugin();
+#elif UNITY_IOS
+        videoPlugin = new WFAdVideoIOSPlugin();
+#endif
+
+        return videoPlugin;
+    }
+    
     public TReturnType CallAndroid<TReturnType>(string funcName, string str)
     {
         if (Application.platform == RuntimePlatform.Android)
