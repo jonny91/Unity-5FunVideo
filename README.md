@@ -102,6 +102,15 @@ Unity ：测试项目
 
 
 
+## iOS 使用
+
+1. 拷贝 BUAdSDK.bundle、WFAdVideoSDK.framwork、CustomAppController.mm 到 Assets\Plugins\iOS 文件夹中
+2. 生成 XCode 项目
+3. 在生成的 XCode 项目中根据 SDK 文档配置引用的库、编译参数等。
+4. 发布项目
+
+
+
 ## 广告结果回调
 
 修改Unity项目中 PluginBehaviour 实现响应的项目处理方法
