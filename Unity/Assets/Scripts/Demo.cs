@@ -25,6 +25,9 @@ public class Demo : MonoBehaviour
     private void Awake()
     {
         _videoPlugin = BasePlugin.Create();
+
+        var plugin = new GameObject("Plugin");
+        plugin.AddComponent<PluginBehaviour>();
     }
 
     private void Start()

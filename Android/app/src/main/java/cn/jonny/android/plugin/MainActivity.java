@@ -3,6 +3,7 @@ package cn.jonny.android.plugin;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.unity3d.player.UnityPlayer;
 import com.unity3d.player.UnityPlayerActivity;
 import com.wufun.pay.plug.wufunvideoadlib.VideoAdData;
 import com.wufun.pay.plug.wufunvideoadlib.WufunVideoAdCenter;
@@ -23,18 +24,18 @@ public class MainActivity extends UnityPlayerActivity {
             public void onSuccess(int isOpen) {
                 Log.d(Tag , "初始化 " + isOpen);
                 if (isOpen == 1) {
-
                     ToastUtils.getInstance(getApplicationContext()).showToastSystem("初始化成功");
                 } else {
                     ToastUtils.getInstance(getApplicationContext()).showToastSystem("关闭");
                 }
-
+                UnityPlayer.UnitySendMessage("Plugin","InitVideoAdSuccessCallback",isOpen + "");
             }
 
             @Override
             public void onFaild(String message) {
                 Log.d(Tag , "初始化失败");
                 ToastUtils.getInstance(getApplicationContext()).showToastSystem("初始化失败");
+                UnityPlayer.UnitySendMessage("Plugin","InitVideoAdFailedCallback",message);
             }
         });
     }
@@ -55,11 +56,13 @@ public class MainActivity extends UnityPlayerActivity {
             @Override
             public void onSuccess(int isOpen) {
                 ToastUtils.getInstance(MainActivity.this).showToastSystem("广告加载完成");
+                UnityPlayer.UnitySendMessage("Plugin","LoadVideoAdSuccessCallback",isOpen + "");
             }
 
             @Override
             public void onFaild(String message) {
                 ToastUtils.getInstance(MainActivity.this).showToastSystem("error message " + message);
+                UnityPlayer.UnitySendMessage("Plugin","LoadVideoFailedCallback",message);
             }
 
         });
@@ -71,24 +74,25 @@ public class MainActivity extends UnityPlayerActivity {
                 @Override
                 public void onVideoAdShow() {
                     Log.e("adshowMeassage", "onVideoAdShow");
+                    UnityPlayer.UnitySendMessage("Plugin","OnVideoAdShowCallback",null);
                 }
 
                 @Override
                 public void onVideoAdClosed() {
-                    Log.e("adshowMeassage", "onVideoAdClosed");
-
+                    Log.e("adshowMeassage", "onVideoAdClosedCallback");
+                    UnityPlayer.UnitySendMessage("Plugin","OnVideoAdClosedCallback",null);
                 }
 
                 @Override
                 public void onVideoAdFinish() {
-                    Log.e("adshowMeassage", "onVideoAdFinish");
-
+                    Log.e("adshowMeassage", "onVideoAdFinishCallback");
+                    UnityPlayer.UnitySendMessage("Plugin","OnVideoAdFinishCallback",null);
                 }
 
                 @Override
                 public void onVideoAdFail(String message) {
                     Log.e("adshowMeassage", "onVideoAdFail  " + message);
-
+                    UnityPlayer.UnitySendMessage("Plugin","OnVideoAdFailCallback",message);
                 }
             });
         } else {

@@ -12,7 +12,7 @@ public class BasePlugin
     {
         IVideo videoPlugin;
 #if UNITY_ANDROID
-        _videoPlugin = new WFAdVideoAndroidPlugin();
+        videoPlugin = new WFAdVideoAndroidPlugin();
 #elif UNITY_IOS
         videoPlugin = new WFAdVideoIOSPlugin();
 #endif
