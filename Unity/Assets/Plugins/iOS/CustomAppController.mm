@@ -12,6 +12,8 @@
 @interface CustomAppController : UnityAppController<WFAdVideoSDKDelegate>
 @end
 
+IMPL_APP_CONTROLLER_SUBCLASS (CustomAppController)
+
 @implementation CustomAppController
 
 extern "C"
