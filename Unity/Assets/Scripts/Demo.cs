@@ -19,8 +19,8 @@ public class Demo : MonoBehaviour
     [SerializeField]
     private Button ShowBtn;
 
-    private  const string USER_ID = "x10234560";
-    
+    private const string USER_ID = "x10234560";
+
     //不同的实现方式
     private IVideo _videoPlugin;
 
@@ -36,14 +36,21 @@ public class Demo : MonoBehaviour
     {
         _videoPlugin.Init();
 
-        LoadBtn.OnClickAsObservable().Subscribe(_ => LoadHandler()).AddTo(this);
-        ShowBtn.OnClickAsObservable().Subscribe(_ => ShowHandler()).AddTo(this);
+        LoadBtn.OnClickAsObservable().SubscribeOnMainThread().Subscribe(_ => LoadHandler()).AddTo(this);
+        ShowBtn.OnClickAsObservable().SubscribeOnMainThread().Subscribe(_ => ShowHandler()).AddTo(this);
     }
 
     private void ShowHandler()
     {
         var text = AdsIdInput.text;
-        _videoPlugin.ShowVideoAd(new[] {USER_ID, text, "广告位" + text});
+        if (_videoPlugin.IsAdReady())
+        {
+            _videoPlugin.ShowVideoAd(new[] {USER_ID, text, "广告位" + text});
+        }
+        else
+        {
+            Debug.LogError("广告还没准备好");
+        }
     }
 
     private void LoadHandler()

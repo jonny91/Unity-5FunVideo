@@ -40,7 +40,7 @@
 
         <meta-data
                 android:name="WF_CHANNEL_ID"
-                android:value="1743" />
+                android:value="1746" />
         <meta-data
                 android:name="WF_APPID"
                 android:value="36" />

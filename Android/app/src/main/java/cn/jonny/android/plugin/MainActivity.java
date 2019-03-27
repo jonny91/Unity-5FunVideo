@@ -40,6 +40,11 @@ public class MainActivity extends UnityPlayerActivity {
         });
     }
 
+    public boolean adIsReady()
+    {
+        return WufunVideoAdCenter.isReadyVideoAd();
+    }
+
     public void loadVideoAd(String jsonArg) {
         LoadVideoAdArgs args = JsonMapper.getInstance().fromJson(jsonArg, LoadVideoAdArgs.class);
         loadVideoAd(args.adPosition, args.positionName);

@@ -27,6 +27,12 @@ public class WFAdVideoAndroidPlugin : BasePlugin, IVideo
         CallAndroid("showVideoAd", jsonArg);
     }
 
+    public bool IsAdReady()
+    {
+        return CallAndroid<bool>("adIsReady",null);
+    }
+
+
     class LoadVideoAdArgs
     {
         public string oUid;

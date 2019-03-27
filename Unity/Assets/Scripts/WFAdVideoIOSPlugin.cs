@@ -45,7 +45,7 @@ public class WFAdVideoIOSPlugin : BasePlugin, IVideo
         WF_ShowVideoAd();
     }
 
-    public bool ADIsReadyToPlay()
+    public bool IsAdReady()
     {
         return WF_ADIsReadyToPlay();
     }
