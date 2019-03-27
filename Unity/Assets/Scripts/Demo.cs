@@ -19,6 +19,8 @@ public class Demo : MonoBehaviour
     [SerializeField]
     private Button ShowBtn;
 
+    private  const string USER_ID = "";
+    
     //不同的实现方式
     private IVideo _videoPlugin;
 
@@ -40,11 +42,13 @@ public class Demo : MonoBehaviour
 
     private void ShowHandler()
     {
-        _videoPlugin.ShowVideoAd(new[] {AdsIdInput.text, "1", "adPosition 1"});
+        var text = AdsIdInput.text;
+        _videoPlugin.ShowVideoAd(new[] {USER_ID, text, "广告位" + text});
     }
 
     private void LoadHandler()
     {
-        _videoPlugin.LoadVideoAd(new[] {"1", "广告位1"});
+        var text = AdsIdInput.text;
+        _videoPlugin.LoadVideoAd(new[] {USER_ID, text, "广告位" + text});
     }
 }

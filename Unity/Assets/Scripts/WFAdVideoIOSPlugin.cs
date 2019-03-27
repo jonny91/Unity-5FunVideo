@@ -14,7 +14,7 @@ public class WFAdVideoIOSPlugin : BasePlugin, IVideo
     private static extern void WF_Init(string initStr);
 
     [DllImport("__Internal")]
-    private static extern void WF_LoadVideoAd(string ab, string userId);
+    private static extern void WF_LoadVideoAd(string ad, string userId);
 
     [DllImport("__Internal")]
     private static extern void WF_ShowVideoAd();
@@ -36,9 +36,10 @@ public class WFAdVideoIOSPlugin : BasePlugin, IVideo
 
     public void LoadVideoAd(string[] args)
     {
-        string adName = args[0];
-        string userId = args[1];
-        WF_LoadVideoAd(adName, userId);
+        string oUid = args[0];
+        string adPosition = args[1];
+        string adName = args[2];
+        WF_LoadVideoAd(adPosition, oUid);
     }
 
     public void ShowVideoAd(string[] args)
