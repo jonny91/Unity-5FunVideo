@@ -18,10 +18,18 @@ IMPL_APP_CONTROLLER_SUBCLASS (CustomAppController)
 
 extern "C"
 {
-    void WF_Init(char *initChar);
+    void WF_Init(char *appKey , int appID , int adID , int channelID , char *extension);
     void WF_LoadVideoAd(char *ab, char *userID);
     void WF_ShowVideoAd();
     bool WF_ADIsReadyToPlay();
+}
+
+
+CustomAppController *CUSTOM_APP_CONTROLLER;
+- (void)startUnity:(UIApplication *)application
+{
+    [super startUnity:application];
+    CUSTOM_APP_CONTROLLER = self;
 }
 
 // 视频广告加载成功
@@ -34,33 +42,38 @@ extern "C"
 - (void)onAdVideoClicked:(NSString *)ad
 {
     NSLog(@"onAdVideoClicked");
-    UnitySendMessage("Plugin", "OnVideoAdFinishCallback", [ad UTF8String]);
+//    UnitySendMessage("Plugin", "OnVideoAdFinishCallback", [ad UTF8String]);
 }
 // 奖励发放
 - (void)adVideoReward:(NSDictionary *)rewardInfo Converted:(BOOL)converted
 {
     NSLog(@"adVideoReward");
-     UnitySendMessage("Plugin", "OnVideoAdFinishCallback","");
+    UnitySendMessage("Plugin", "OnVideoAdFinishCallback","");
 }
 
-void WF_Init(char *initChar)
-{    
-    NSDictionary *param = [CustomAppController dictionaryWithJsonString:[NSString stringWithUTF8String:initChar]];
-    
-    [WFAdVideoSDK initAdVideoSDKWithParameters:param];
-    
-    NSLog(@"WF_Init");
-}
-
-void WF_LoadVideoAd(char *ab, char *userId)
+void WF_Init(char *appKey , int appID , int adID , int channelID , char *extension)
 {
-    NSLog(@"WF_LoadVideoAd %s   %s",ab,userId);
-    [WFAdVideoSDK loadVideoAd:[NSString stringWithUTF8String:ab] UserId:[NSString stringWithUTF8String:userId]];
+    [WFAdVideoSDK sharedSDKManager].isPrintLog = TRUE;
+    
+    NSDictionary *param = @{
+                            @"appKey"         : [NSString stringWithUTF8String:appKey],//（NSString）
+                            @"appID"          : [NSNumber numberWithInt:appID],//（NSInteger）
+                            @"adID"           : [NSNumber numberWithInt:adID],//广告ID（NSInteger）
+                            @"channelID"      : [NSNumber numberWithInt:channelID],//渠道ID（NSInteger）
+                            @"extension"      : [NSString stringWithUTF8String:extension],//扩展参数（NSString）
+                            };
+    
+    [WFAdVideoSDK sharedSDKManager].delegate = CUSTOM_APP_CONTROLLER;
+    [WFAdVideoSDK initAdVideoSDKWithParameters:param];
+}
+
+void WF_LoadVideoAd(char *ad, char *userId)
+{
+    [WFAdVideoSDK loadVideoAd:[NSString stringWithUTF8String:ad] UserId:[NSString stringWithUTF8String:userId]];
 }
 
 void WF_ShowVideoAd()
 {
-    NSLog(@"WF_ShowVideoAd");
     if([WFAdVideoSDK adIsReadyToPlay])
     {
         [WFAdVideoSDK showVideoAdOnViewController:GetAppController().rootViewController];
@@ -71,24 +84,4 @@ bool WF_ADIsReadyToPlay()
 {
     return [WFAdVideoSDK adIsReadyToPlay];
 }
-
-+ (NSDictionary *) dictionaryWithJsonString:(NSString *)jsonString
-{
-    if (jsonString == nil) {
-        return nil;
-    }
-    
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *err;
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                        options:NSJSONReadingMutableContainers
-                                                          error:&err];
-    if(err)
-    {
-        NSLog(@"json解析失败：%@",err);
-        return nil;
-    }
-    return dic;
-}
-
 @end

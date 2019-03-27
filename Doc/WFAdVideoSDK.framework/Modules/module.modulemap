@@ -1,0 +1,6 @@
+framework module WFAdVideoSDK {
+  umbrella header "WFAdVideoSDK.h"
+
+  export *
+  module * { export * }
+}

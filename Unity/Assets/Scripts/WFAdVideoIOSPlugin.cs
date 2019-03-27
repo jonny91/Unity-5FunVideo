@@ -11,7 +11,7 @@ using UnityEngine;
 public class WFAdVideoIOSPlugin : BasePlugin, IVideo
 {
     [DllImport("__Internal")]
-    private static extern void WF_Init(string initStr);
+    private static extern void WF_Init(string appKey, int appID, int adID, int channelID, string extension);
 
     [DllImport("__Internal")]
     private static extern void WF_LoadVideoAd(string ad, string userId);
@@ -29,9 +29,7 @@ public class WFAdVideoIOSPlugin : BasePlugin, IVideo
 //        @"adID"           : @0,//广告ID（NSInteger）
 //        @"channelID"      : @1736,//渠道ID（NSInteger）
 //        @"extension"      : @"扩展参数",//扩展参数（NSString）
-        string json =
-            "{\"appkey\":\"5d735ac4c782401c89f8a958277ed4b5\",\"appID\":36,\"adID\":0,\"channelID\":1736,\"extension\":\"扩展参数\"}";
-        WF_Init(json);
+        WF_Init("5d735ac4c782401c89f8a958277ed4b5", 36, 0, 1746, "扩展字段");
     }
 
     public void LoadVideoAd(string[] args)

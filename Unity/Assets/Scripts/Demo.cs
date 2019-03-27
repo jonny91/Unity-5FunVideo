@@ -19,7 +19,7 @@ public class Demo : MonoBehaviour
     [SerializeField]
     private Button ShowBtn;
 
-    private  const string USER_ID = "";
+    private  const string USER_ID = "x10234560";
     
     //不同的实现方式
     private IVideo _videoPlugin;
