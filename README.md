@@ -89,15 +89,16 @@ Unity ：测试项目
 
 2. IVideo.LoadVideoAd(string[] args)
 
-   | args[0] | adPosition   |
-   | ------- | ------------ |
-   | args[1] | positionName |
+   | args[0] | oUid       |
+   | ------- | ---------- |
+   | args[1] | adID       |
+   | args[2] | adPosition |
 
 3. IVideo.ShowVideoAd(string[] args)
 
    | args[0] | oUid       |
    | ------- | ---------- |
-   | args[1] | adName     |
+   | args[1] | adID       |
    | args[2] | adPosition |
 
 
