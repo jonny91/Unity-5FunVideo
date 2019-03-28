@@ -1,5 +1,7 @@
 package cn.jonny.android.plugin;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -50,9 +52,15 @@ public class MainActivity extends UnityPlayerActivity {
         loadVideoAd(args.adPosition, args.positionName);
     }
 
-    public void showVideoAd(String jsonArg) {
-        ShowVideoAdArgs args = JsonMapper.getInstance().fromJson(jsonArg, ShowVideoAdArgs.class);
-        showVideoAd(args.oUid, args.adPosition, args.adName);
+    public void showVideoAd(final String jsonArg) {
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                ShowVideoAdArgs args = JsonMapper.getInstance().fromJson(jsonArg, ShowVideoAdArgs.class);
+                showVideoAd(args.oUid, args.adPosition, args.adName);
+            }
+        });
     }
 
     public void loadVideoAd(int adPosition, String positionName) {
@@ -79,19 +87,19 @@ public class MainActivity extends UnityPlayerActivity {
                 @Override
                 public void onVideoAdShow() {
                     Log.e("adshowMeassage", "onVideoAdShow");
-                    UnityPlayer.UnitySendMessage("Plugin","OnVideoAdShowCallback",null);
+                    UnityPlayer.UnitySendMessage("Plugin","OnVideoAdShowCallback","");
                 }
 
                 @Override
                 public void onVideoAdClosed() {
                     Log.e("adshowMeassage", "onVideoAdClosedCallback");
-                    UnityPlayer.UnitySendMessage("Plugin","OnVideoAdClosedCallback",null);
+                    UnityPlayer.UnitySendMessage("Plugin","OnVideoAdClosedCallback","");
                 }
 
                 @Override
                 public void onVideoAdFinish() {
                     Log.e("adshowMeassage", "onVideoAdFinishCallback");
-                    UnityPlayer.UnitySendMessage("Plugin","OnVideoAdFinishCallback",null);
+                    UnityPlayer.UnitySendMessage("Plugin","OnVideoAdFinishCallback","");
                 }
 
                 @Override

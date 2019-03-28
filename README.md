@@ -96,10 +96,14 @@ Unity ：测试项目
 
 3. IVideo.ShowVideoAd(string[] args)
 
-   | args[0] | oUid       |
-   | ------- | ---------- |
-   | args[1] | adID       |
-   | args[2] | adPosition |
+   | args[0] | oUid        |
+   | ------- | ----------- |
+   | args[1] | adID        |
+   | args[2] | adPosition. |
+
+4. bool IVideo.IsAdReady()
+
+   广告有没有加载好
 
 
 
